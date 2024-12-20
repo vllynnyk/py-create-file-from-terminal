@@ -7,11 +7,11 @@ def create_file() -> None:
     current_directory = os.getcwd()
     if "-d" in sys.argv and "-f" in sys.argv:
         for i in range(sys.argv.index("-d"), sys.argv.index("-f")):
-            name_directory = current_directory + f"/{sys.argv[i]}"
+            name_directory = os.path.join(current_directory, sys.argv[i])
             os.makedirs(name_directory)
     elif "-d" in sys.argv:
         for i in range(sys.argv.index("-d"), len(sys.argv)):
-            name_directory = current_directory + f"/{sys.argv[i]}"
+            name_directory = os.path.join(current_directory, sys.argv[i])
             os.makedirs(name_directory)
     if "-f" in sys.argv:
         data_current = datetime.now()
@@ -28,6 +28,5 @@ def create_file() -> None:
                 file_line = input("Enter content line: ")
                 if file_line == "stop":
                     break
-                else:
-                    f.write(f"{index_line} {file_line}\n")
-                    index_line += 1
+                f.write(f"{index_line} {file_line}\n")
+                index_line += 1
